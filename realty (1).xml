@@ -46,7 +46,7 @@
         <param name="Число комнат">3</param>
         <param name="Площадь">87</param>
         <param name="С земельным участком">true</param>
-        <param name="Площадь участка"unit="сотки">4,26</param>
+        <param name="Площадь участка" unit="сотки">4,26</param>
         <param name="Адрес">г. Краснодар, м-н Берёзовый, территория звёздная, 1</param>
         <param name="Отделка">Чистовая</param>
         <param name="Этаж">1</param>
