@@ -24,6 +24,7 @@
       <set id="s3">
         <name>Купить дом от застройщика в Краснодаре</name>
         <url>https://zvezdnyi-dom.ru/</url>
+        </set>
     </sets>
     <offers>
       <offer id="dom1"><!--Это оффер для конкретной квартиры-->
