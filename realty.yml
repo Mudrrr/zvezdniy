@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<yml_catalog date="2018-07-17 12:10">
+  <shop>
+    <name>Сэмпл.Недвижимость</name>
+    <company>ООО Сэмпл</company>
+    <url>realty.sample.s3.yandex.net</url>
+    <email>realty@sample.s3.yandex.net</email>
+    <currencies>
+      <currency id="RUR" rate="1" />
+    </currencies>
+    <categories>
+      <category id="1">Квартира</category>
+      <category id="2" parentId="1">Студия</category>
+      <category id="3" parentId="1">1-комнатная</category>
+      <category id="4" parentId="1">2-комнатная</category>
+      <category id="5" parentId="1">3-комнатная</category>
+      <category id="6" parentId="1">4-к и более</category>
+      <category id="7">Жилой комплекс</category>
+    </categories>
+    <!--Добавили sets по сравнению с обычным YML-->
+    <sets>
+      <set id="s1">
+        <name>Купить квартиру в новостройке в Москве</name>
+        <url>https://realty.sample.s3.yandex.net/moskva/kupit/novostrojka/</url>
+      </set>
+      <set id="s2">
+        <name>Купить квартиру в новостройке в Московской области</name>
+        <url>https://realty.sample.s3.yandex.net/moskovskaya_oblast/kupit/novostrojka/</url>
+      </set>
+      <set id="s3">
+        <name>Купить квартиру в Москве</name>
+        <url>https://realty.sample.s3.yandex.net/moskva/kupit/kvartira/</url>
+      </set>
+      <set id="s4">
+        <name>Купить апартаменты в Москве</name>
+        <url>https://realty.sample.s3.yandex.net/moskva/kupit/kvartira/apartamenty/</url>
+      </set>
+      <set id="s5">
+        <name>Купить квартиру в брежневке в Москве</name>
+        <url>https://realty.sample.s3.yandex.net/moskva/kupit/kvartira/brezhnevskiy/</url>
+      </set>
+      <set id="s6">
+        <name>Купить апартаменты в брежневке в Москве</name>
+        <url>https://realty.sample.s3.yandex.net/moskva/kupit/kvartira/brezhnevskiy-i-apartamenty/</url>
+      </set>
+      <set id="s101">
+        <name>ЖК Дом на Мосфильмовской</name>
+        <url>https://realty.sample.s3.yandex.net/moskva_i_moskovskaya_oblast/kupit/novostrojka/na-mosfilmovskoj-177554/</url>
+      </set>
+    </sets>
+    <offers>
+      <offer id="2006787463342883250"><!--Это оффер для конкретной квартиры-->
+        <name>2-комнатная, 45 м²</name><!--Текст карточки оффера в поисковой выдаче-->
+        <vendor>Агентство Homeapp</vendor>
+        <url>https://realty.sample.s3.yandex.net/offer/2006787463342883250/</url>
+        <price>10700000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>4</categoryId>
+        <set-ids>s3</set-ids>
+        <picture>https://avatars.mds.yandex.net/get-realty/174962/offer.2006787463342883250.9212417342635595804/large</picture>
+        <description>Ипотека, свободная продажа.</description>
+        <!--Этот набор параметров обязателен-->
+        <param name="Конверсия">-1</param><!--Это произвольное число, оно не обязано быть от 0 до 1-->
+        <param name="Тип предложения">Продажа</param>
+        <!--Этот набор параметров необязателен-->
+        <!--Эти параметры могут быть и в подборке, если она достаточно узкая, например, по всем однушкам в ЖК-->
+        <param name="Год постройки">1964</param>
+        <param name="Число комнат">2</param>
+        <param name="Площадь">44.8</param>
+        <param name="Расстояние до метро" unit="Пешком">9</param>
+        <param name="Адрес">Изюмская улица, 26к1</param>
+        <param name="Дата публикации">2021-06-09T16:00:00</param>
+        <param name="Ремонт">Косметический</param>
+      </offer>
+      <offer id="1064775055312738864"><!--Это оффер-подборка объявлений конкретного ЖК, при этом совпадает по урлу с сетом s101-->
+        <name>На Мосфильмовской</name>
+        <vendor>Донстрой</vendor>
+        <url>https://realty.sample.s3.yandex.net/moskva_i_moskovskaya_oblast/kupit/novostrojka/na-mosfilmovskoj-177554/</url>
+        <categoryId>7</categoryId>
+        <price from="true">42402112</price>
+        <currencyId>RUR</currencyId>
+        <param name="Конверсия">0.51112</param>
+        <param name="Тип предложения">Продажа</param>
+        <set-ids>s1,s2</set-ids><!--Можно указать и несколько сетов через запятую-->
+        <param name="Число объявлений">149</param>
+        <param name="Широта">55.723236083984375</param>
+        <param name="Долгота">37.52790451049805</param>
+        <description>Цены, планировки и наличие квартир. Актуальные предложения в доме на Мосфильмовской. Москва, ул. Мосфильмовская, 8</description>
+        <!--Если в оффере ЖК есть несколько картинок, а сет с тем же урлом содержит типы квартир в этом ЖК, вместо карусели типов квартир в Поиске будет показана более привлекательная таблица-->
+        <picture>https://avatars.mds.yandex.net/get-verba/937147/2a00000160944b170f811a6e498a4c8169f1/wiz_t2</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/997355/2a00000163d5b6b71fe59482bc04691695fc/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/787013/2a00000163d5b5e7d45c910ebb1a53313d6c/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/216201/2a00000163d5b5a5c282891049ed9b192ff7/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/216201/2a00000163d5b56d1501bb127d688a1b59c0/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/787013/2a00000163d5b526bf943f9319b1db6cb030/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/937147/2a00000160923cdfabc2136e3103ff2bc8c3/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/787013/2a00000160944a080c1d4d82f740d6ba5dbc/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/787013/2a0000016093d87ac0ad12abcef13540be5f/realty_app_middle</picture>
+        <picture>https://avatars.mds.yandex.net/get-verba/216201/2a000001609dcf87214cbd1f8bb5c5e07c53/realty_app_middle</picture>
+      </offer>
+      <offer id="8075260396163574144"><!--Это оффер-подборка одного из типов квартир в ЖК - и будет одной из строк при обогащении сета s101-->
+        <name>1-комнатные</name>
+        <url>https://realty.sample.s3.yandex.net/moskva_i_moskovskaya_oblast/kupit/novostrojka/na-mosfilmovskoj-177554/?roomsTotal=1#flats</url>
+        <categoryId>1</categoryId>
+        <price from="true">90999992</price>
+        <currencyId>RUR</currencyId>
+        <param name="Конверсия">0.51112</param>
+        <param name="Тип предложения">Продажа</param>
+        <set-ids>s101</set-ids>
+        <param name="Площадь">147</param>
+        <param name="Число объявлений">1</param>
+        <param name="Число комнат">1</param>
+        <picture>https://avatars.mds.yandex.net/get-verba/937147/2a00000160944b170f811a6e498a4c8169f1/wiz_t2</picture>
+      </offer>
+    </offers>
+  </shop>
+</yml_catalog>
