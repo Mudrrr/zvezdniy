@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<yml_catalog date="2024-16-05 12:10">
+  <shop>
+    <name>Коттеджный поселок «Звездный»</name>
+    <company>ООО КП «Звездный»</company>
+    <url>https://zvezdnyi-dom.ru</url>
+    <email>sik-nasledie.yandex.ru</email>
+    <currencies>
+      <currency id="RUR" rate="1" />
+    </currencies>
+    <categories>
+      <category id="1">Дом</category>
+    </categories>
+    <!--Добавили sets по сравнению с обычным YML-->
+    <sets>
+      <set id="s1">
+        <name>Купить дом с газом в Краснодаре</name>
+        <url>https://zvezdnyi-dom.ru</url>
+      </set>
+      <set id="s2">
+        <name>Купить дом в коттеджном поселке в Краснодаре</name>
+        <urlhttps://zvezdnyi-dom.ru/</url>
+      </set>
+      <set id="s3">
+        <name>Купить дом от застройщика в Краснодаре</name>
+        <url>https://zvezdnyi-dom.ru/</url>
+    </sets>
+    <offers>
+      <offer id="dom1"><!--Это оффер для конкретной квартиры-->
+        <name>дом «Орион» с газом</name><!--Текст карточки оффера в поисковой выдаче-->
+        <vendor>отдел продаж КП «Звездный»</vendor>
+        <url>https://zvezdnyi-dom.ru/orion/</url>
+        <price>10500000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>1</categoryId>
+        <set-ids>s1</set-ids>
+        <picture>https://optim.tildacdn.com/tild6465-3133-4539-a138-316239353166/-/format/webp/20240319_135720.jpg</picture>
+        <description>Ипотека, свободная продажа.</description>
+        <!--Этот набор параметров обязателен-->
+        <param name="Конверсия">-1</param><!--Это произвольное число, оно не обязано быть от 0 до 1-->
+        <param name="Тип предложения">Продажа</param>
+        <!--Этот набор параметров необязателен-->
+        <!--Эти параметры могут быть и в подборке, если она достаточно узкая, например, по всем однушкам в ЖК-->
+        <param name="Год постройки">2024</param>
+        <param name="Число комнат">3</param>
+        <param name="Площадь">87</param>
+        <param name="С земельным участком">true</param>
+        <param name="Площадь участка"unit="сотки">4,26</param>
+        <param name="Адрес">г. Краснодар, м-н Берёзовый, территория звёздная, 1</param>
+        <param name="Отделка">Чистовая</param>
+        <param name="Этаж">1</param>
+      </offer>
+    </offers>
+  </shop>
+</yml_catalog>
