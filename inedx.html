@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сибирские чаны от Durov House - Собственное производство в Воронеже</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .promo-badge {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .8;
+            }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        
+        .hero-image {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .countdown {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        /* Gallery Styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .video-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-content {
+            position: relative;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90vh;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: translateY(-50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(-50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content img,
+        .lightbox-content video {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #10b981;
+            transform: scale(1.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(16, 185, 129, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .gallery-filter {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .gallery-filter:hover {
+            border-color: #764ba2;
+            color: #764ba2;
+        }
+
+        .gallery-filter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Шапка -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 mr-3 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        DH
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold">Durov.House</div>
+                        <div class="text-sm text-gray-600">Сибирские чаны собственного производства</div>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="tel:+79066773555" class="text-blue-600 font-semibold hover:text-blue-700">
+                        +7 906 677-35-55
+                    </a>
+                    <button onclick="openModal('visit')" class="cta-button text-white px-6 py-3 rounded-lg font-semibold">
+                        Посмотреть на производстве
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Акционный баннер -->
+    <div class="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 text-white py-3">
+        <div class="container mx-auto px-4 text-center">
+            <p class="font-bold text-lg">
+                🎁 АКЦИЯ! При покупке чана до 31.12.2025 - весло в подарок! 
+                <span class="countdown ml-2" id="countdown"></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Главный блок -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-block bg-white bg-opacity-20 px-4 py-2 rounded-full mb-6">
+                        <span class="font-semibold">✨ Собственное производство в Воронеже</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+                        Сибирские чаны премиум-класса
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                        Идеальное решение для отдыха и банных процедур. От 195 000 ₽
+                    </p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-lg">Пищевая нержавеющая сталь 304</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-lg">Гарантия 5 лет на сварочные швы</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-lg">Готов за 10 рабочих дней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button onclick="openModal('visit')" class="cta-button text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl">
+                            🏭 Посмотреть выставочный образец
+                        </button>
+                        <a href="#catalog" class="bg-white text-purple-700 px-8 py-4 rounded-lg font-bold text-lg text-center hover:bg-gray-100 transition">
+                            Смотреть модели
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image rounded-3xl p-12 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4">🛁</div>
+                        <p class="text-2xl font-semibold text-gray-700">Выставочный образец<br>на производстве</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок срочности -->
+    <section class="bg-yellow-50 py-12 border-y-4 border-yellow-400">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    👀 Увидеть своими глазами - лучший способ принять решение!
+                </h2>
+                <p class="text-xl text-gray-700 mb-6">
+                    У нас на производстве стоит полностью укомплектованный выставочный образец. 
+                    Вы сможете оценить качество материалов, швов, посмотреть, как работает топка.
+                </p>
+                <div class="grid md:grid-cols-3 gap-6 text-left">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-3xl mb-3">👨‍🏭</div>
+                        <h3 class="font-bold text-lg mb-2">Экскурсия по производству</h3>
+                        <p class="text-gray-600">Покажем процесс изготовления от начала до конца</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-3xl mb-3">📏</div>
+                        <h3 class="font-bold text-lg mb-2">Подберем размер</h3>
+                        <p class="text-gray-600">Поможем выбрать оптимальную модель под ваши задачи</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-3xl mb-3">💬</div>
+                        <h3 class="font-bold text-lg mb-2">Ответим на вопросы</h3>
+                        <p class="text-gray-600">Расскажем про установку, эксплуатацию, уход</p>
+                    </div>
+                </div>
+                <button onclick="openModal('visit')" class="mt-8 cta-button text-white px-10 py-5 rounded-lg font-bold text-xl shadow-xl">
+                    Записаться на просмотр
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ГАЛЕРЕЯ -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Галерея наших чанов</h2>
+                <p class="text-xl text-gray-600 mb-8">Посмотрите, как наши чаны выглядят в разных локациях и времена года</p>
+                
+                <!-- Фильтры -->
+                <div class="flex flex-wrap justify-center mb-8">
+                    <span class="gallery-filter active" data-filter="all">Все</span>
+                    <span class="gallery-filter" data-filter="production">Производство</span>
+                    <span class="gallery-filter" data-filter="nature">На природе</span>
+                    <span class="gallery-filter" data-filter="winter">Зима</span>
+                    <span class="gallery-filter" data-filter="video">Видео</span>
+                </div>
+            </div>
+
+            <!-- Сетка галереи -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto" id="galleryGrid">
+                <!-- Производство -->
+                <div class="gallery-item h-80 production" data-category="production" data-index="0">
+                    <img src="/mnt/user-data/uploads/Производство_Чанов.png" alt="Производство чанов">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🏭 Производство чанов</p>
+                    </div>
+                </div>
+
+                <!-- Чан зима (вид сверху) -->
+                <div class="gallery-item h-80 winter nature" data-category="winter" data-index="1">
+                    <img src="/mnt/user-data/uploads/Зима-сверху.png" alt="Чан зимой вид сверху">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">❄️ Зимний релакс с высоты</p>
+                    </div>
+                </div>
+
+                <!-- Чан зима с рекой -->
+                <div class="gallery-item h-80 winter nature" data-category="winter" data-index="2">
+                    <img src="/mnt/user-data/uploads/Чан_зима.png" alt="Чан зимой у реки">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">❄️ Зимний чан у реки</p>
+                    </div>
+                </div>
+
+                <!-- Чан лето -->
+                <div class="gallery-item h-80 nature" data-category="nature" data-index="3">
+                    <img src="/mnt/user-data/uploads/Лето.png" alt="Чан летом у озера">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">☀️ Летний вечер у озера</p>
+                    </div>
+                </div>
+
+                <!-- Чан осень -->
+                <div class="gallery-item h-80 nature" data-category="nature" data-index="4">
+                    <img src="/mnt/user-data/uploads/Чан_осень.png" alt="Чан осенью">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🍂 Золотая осень</p>
+                    </div>
+                </div>
+
+                <!-- Чан на горе -->
+                <div class="gallery-item h-80 nature" data-category="nature" data-index="5">
+                    <img src="/mnt/user-data/uploads/Чан_на_горе.png" alt="Чан на горе">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🏔️ На вершине горы</p>
+                    </div>
+                </div>
+
+                <!-- Чан в Турции -->
+                <div class="gallery-item h-80 nature" data-category="nature" data-index="6">
+                    <img src="/mnt/user-data/uploads/Чан_в_Турции.png" alt="Чан в Турции">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🌅 Закат в Турции</p>
+                    </div>
+                </div>
+
+                <!-- Видео 1 -->
+                <div class="gallery-item h-80 video" data-category="video" data-index="7">
+                    <video src="/mnt/user-data/uploads/grok-video-b13b9b04-c7c4-42f1-a1a5-e13c7ab7a0f2.mp4" muted></video>
+                    <div class="video-badge">▶ ВИДЕО</div>
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🎥 Видео обзор чана</p>
+                    </div>
+                </div>
+
+                <!-- Видео 2 -->
+                <div class="gallery-item h-80 video" data-category="video" data-index="8">
+                    <video src="/mnt/user-data/uploads/grok-video-fd57ed1b-3690-4c56-a3b1-b129505c4014.mp4" muted></video>
+                    <div class="video-badge">▶ ВИДЕО</div>
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🎥 Чан в действии</p>
+                    </div>
+                </div>
+
+                <!-- Видео с дроном -->
+                <div class="gallery-item h-80 video" data-category="video" data-index="9">
+                    <video src="/mnt/user-data/uploads/Дрон_летит.mp4" muted></video>
+                    <div class="video-badge">▶ ВИДЕО</div>
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">🎥 Съемка с дрона</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="openModal('visit')" class="cta-button text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl">
+                    Хочу такой же чан!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox для галереи -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
+        <span class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</span>
+        <div class="lightbox-content" id="lightboxContent"></div>
+    </div>
+
+    <!-- Каталог чанов -->
+    <section id="catalog" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Выберите свой чан</h2>
+                <p class="text-xl text-gray-600">Три размера для компаний от 4 до 8 человек</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Чан 1800 -->
+                <div class="card-hover bg-white border-2 border-gray-200 rounded-2xl overflow-hidden">
+                    <div class="bg-gradient-to-br from-blue-100 to-purple-100 p-8 text-center">
+                        <div class="text-6xl mb-4">🛁</div>
+                        <h3 class="text-2xl font-bold mb-2">Чан 1800</h3>
+                        <p class="text-gray-600">Для компании из 4-6 человек</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold gradient-text mb-2">195 000 ₽</div>
+                            <div class="text-green-600 font-semibold">+ весло в подарок! 🎁</div>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Объем воды: ~1.2 м³</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Вместимость: 4-6 человек</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Время нагрева: 2.5 часа</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Полная комплектация</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="openModal('order', 'Чан 1800')" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            Заказать
+                        </button>
+                        <button onclick="openModal('visit')" class="w-full mt-2 border-2 border-green-500 text-green-600 py-3 rounded-lg font-semibold hover:bg-green-50 transition">
+                            Посмотреть на производстве
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Чан 1900 -->
+                <div class="card-hover bg-white border-4 border-purple-500 rounded-2xl overflow-hidden relative">
+                    <div class="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm promo-badge">
+                        ХИТ 🔥
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-100 to-pink-100 p-8 text-center">
+                        <div class="text-6xl mb-4">🛁</div>
+                        <h3 class="text-2xl font-bold mb-2">Чан 1900</h3>
+                        <p class="text-gray-600">Для компании из 6 человек</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold gradient-text mb-2">220 000 ₽</div>
+                            <div class="text-green-600 font-semibold">+ весло в подарок! 🎁</div>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Объем воды: ~1.35 м³</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Вместимость: 6 человек</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Время нагрева: 2.5 часа</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Полная комплектация</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="openModal('order', 'Чан 1900')" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            Заказать
+                        </button>
+                        <button onclick="openModal('visit')" class="w-full mt-2 border-2 border-green-500 text-green-600 py-3 rounded-lg font-semibold hover:bg-green-50 transition">
+                            Посмотреть на производстве
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Чан 2100 -->
+                <div class="card-hover bg-white border-2 border-gray-200 rounded-2xl overflow-hidden">
+                    <div class="bg-gradient-to-br from-pink-100 to-red-100 p-8 text-center">
+                        <div class="text-6xl mb-4">🛁</div>
+                        <h3 class="text-2xl font-bold mb-2">Чан 2100</h3>
+                        <p class="text-gray-600">Для компании из 6-8 человек</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold gradient-text mb-2">245 000 ₽</div>
+                            <div class="text-green-600 font-semibold">+ весло в подарок! 🎁</div>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Объем воды: ~1.55 м³</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Вместимость: 6-8 человек</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Время нагрева: 2.5 часа</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm">Полная комплектация</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="openModal('order', 'Чан 2100')" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            Заказать
+                        </button>
+                        <button onclick="openModal('visit')" class="w-full mt-2 border-2 border-green-500 text-green-600 py-3 rounded-lg font-semibold hover:bg-green-50 transition">
+                            Посмотреть на производстве
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дополнительные опции -->
+            <div class="mt-16 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-8">Дополнительные опции</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Стол в центре чаши</h4>
+                                <p class="text-gray-600 text-sm">Съемный столик для напитков и закусок</p>
+                            </div>
+                            <div class="text-2xl font-bold text-purple-600">6 000 ₽</div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Заливная горловина</h4>
+                                <p class="text-gray-600 text-sm">Удобное заполнение водой</p>
+                            </div>
+                            <div class="text-2xl font-bold text-purple-600">3 000 ₽</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Комплектация -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">Полная комплектация включена в цену</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-4xl mb-3">🛁</div>
+                        <h3 class="font-bold text-lg mb-2">Чаша из нержавейки</h3>
+                        <p class="text-gray-600 text-sm">Пищевая сталь 304, стенки 2мм, дно 3мм</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-4xl mb-3">🪜</div>
+                        <h3 class="font-bold text-lg mb-2">Лестница</h3>
+                        <p class="text-gray-600 text-sm">Удобный вход в чан</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-4xl mb-3">🌡️</div>
+                        <h3 class="font-bold text-lg mb-2">Термометр</h3>
+                        <p class="text-gray-600 text-sm">Контроль температуры воды</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-4xl mb-3">🚰</div>
+                        <h3 class="font-bold text-lg mb-2">Кран из нержавейки</h3>
+                        <p class="text-gray-600 text-sm">Диаметр 42мм для слива воды</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-4xl mb-3">🔥</div>
+                        <h3 class="font-bold text-lg mb-2">Топка</h3>
+                        <p class="text-gray-600 text-sm">Черный металл 3мм с чугунной дверью</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-4xl mb-3">💨</div>
+                        <h3 class="font-bold text-lg mb-2">Дымоход</h3>
+                        <p class="text-gray-600 text-sm">Нержавейка Ø150мм с сендвичем</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-white p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Материалы премиум-класса</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-3 text-lg">🌲 Облицовка лиственницей</h4>
+                            <p class="text-gray-600 mb-4">Высший сорт (экстра), обработана термостойкими красками до 1000°C</p>
+                            
+                            <h4 class="font-bold mb-3 text-lg">⚙️ Метизы из нержавейки</h4>
+                            <p class="text-gray-600">Саморезы, болты, гайки - всё из нержавеющей стали</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-3 text-lg">🔨 TIG сварка с двух сторон</h4>
+                            <p class="text-gray-600 mb-4">Двусторонние швы обеспечивают максимальную надежность</p>
+                            
+                            <h4 class="font-bold mb-3 text-lg">🎨 Варианты отделки</h4>
+                            <p class="text-gray-600">Полная нержавейка или отделка ДПК-доской</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Почему выбирают нас</h2>
+            
+            <div class="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white text-3xl">
+                        ⭐
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">5 лет гарантии</h3>
+                    <p class="text-gray-600">На сварочные швы и конструкцию</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-3xl">
+                        ⚡
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">10 рабочих дней</h3>
+                    <p class="text-gray-600">Изготовление и доставка</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl">
+                        🏭
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Своё производство</h3>
+                    <p class="text-gray-600">Контроль качества на каждом этапе</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center text-white text-3xl">
+                        🎨
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Индивидуальный дизайн</h3>
+                    <p class="text-gray-600">Возможность кастомизации</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию БОЛЬШОЙ -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                    Приезжайте на производство и убедитесь в качестве сами!
+                </h2>
+                <p class="text-xl text-blue-100 mb-10">
+                    Выставочный образец всегда готов к просмотру. Покажем, расскажем, поможем с выбором.
+                </p>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 mb-10">
+                    <div class="grid md:grid-cols-3 gap-6 text-white">
+                        <div>
+                            <div class="text-4xl mb-3">📍</div>
+                            <div class="font-semibold">Адрес</div>
+                            <div class="text-blue-100">г. Воронеж</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl mb-3">📞</div>
+                            <div class="font-semibold">Телефон</div>
+                            <div class="text-blue-100">+7 906 677-35-55</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl mb-3">⏰</div>
+                            <div class="font-semibold">Режим работы</div>
+                            <div class="text-blue-100">Пн-Пт: 9:00-18:00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="openModal('visit')" class="cta-button text-white px-12 py-6 rounded-lg font-bold text-2xl shadow-2xl">
+                    🏭 Записаться на просмотр прямо сейчас
+                </button>
+                
+                <p class="text-white mt-6 text-lg">
+                    ☎️ Или звоните: <a href="tel:+79066773555" class="font-bold underline hover:text-green-200">+7 906 677-35-55</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-xl font-bold mb-4">Durov.House</div>
+                    <p class="text-gray-400">Производство сибирских чанов премиум-класса</p>
+                </div>
+                <div>
+                    <div class="font-bold mb-4">Контакты</div>
+                    <p class="text-gray-400">г. Воронеж</p>
+                    <p class="text-gray-400">+7 906 677-35-55</p>
+                    <p class="text-gray-400">sales@durov.house</p>
+                </div>
+                <div>
+                    <div class="font-bold mb-4">Режим работы</div>
+                    <p class="text-gray-400">Пн-Пт: 9:00-18:00</p>
+                    <p class="text-gray-400">Сб-Вс: по записи</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Durov.House. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно "Записаться на просмотр" -->
+    <div id="visitModal" class="modal">
+        <div class="modal-content">
+            <div class="gradient-bg text-white p-8 rounded-t-2xl">
+                <span class="close" onclick="closeModal('visit')">&times;</span>
+                <h2 class="text-3xl font-bold mb-2">Записаться на просмотр выставочного образца</h2>
+                <p class="text-blue-100">Оставьте заявку, и мы свяжемся с вами для согласования времени визита</p>
+            </div>
+            <div class="p-8">
+                <form id="visitForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Ваше имя *</label>
+                        <input type="text" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Иван">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Телефон *</label>
+                        <input type="tel" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Предпочитаемое время визита</label>
+                        <select class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
+                            <option>Утро (9:00-12:00)</option>
+                            <option>День (12:00-15:00)</option>
+                            <option>Вечер (15:00-18:00)</option>
+                            <option>Уточним при звонке</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Комментарий</label>
+                        <textarea class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" rows="3" placeholder="Какие вопросы хотели бы обсудить?"></textarea>
+                    </div>
+                    <button type="submit" class="w-full cta-button text-white py-4 rounded-lg font-bold text-lg">
+                        Записаться на просмотр
+                    </button>
+                    <p class="text-sm text-gray-500 text-center">Мы перезвоним в течение 30 минут в рабочее время</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно "Заказать чан" -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="gradient-bg text-white p-8 rounded-t-2xl">
+                <span class="close" onclick="closeModal('order')">&times;</span>
+                <h2 class="text-3xl font-bold mb-2">Заказать <span id="orderModelName"></span></h2>
+                <p class="text-blue-100">Оставьте заявку, и наш менеджер свяжется с вами для оформления заказа</p>
+            </div>
+            <div class="p-8">
+                <form id="orderForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Ваше имя *</label>
+                        <input type="text" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="Иван">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Телефон *</label>
+                        <input type="tel" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none" placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Способ связи</label>
+                        <select class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
+                            <option>Звонок</option>
+                            <option>WhatsApp</option>
+                            <option>Telegram</option>
+                        </select>
+                    </div>
+                    
+                    <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
+                        <div class="flex items-center mb-2">
+                            <input type="checkbox" id="wantVisit" class="mr-2">
+                            <label for="wantVisit" class="font-semibold text-gray-700">Хочу сначала посмотреть на производстве</label>
+                        </div>
+                        <p class="text-sm text-gray-600">Рекомендуем посетить наше производство перед заказом</p>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-purple-700 transition">
+                        Отправить заявку
+                    </button>
+                    <p class="text-sm text-gray-500 text-center">Мы перезвоним в течение 30 минут в рабочее время</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Плавающая кнопка -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="openModal('visit')" class="cta-button text-white px-6 py-4 rounded-full font-bold text-lg shadow-2xl flex items-center space-x-2 promo-badge">
+            <span>🏭</span>
+            <span class="hidden md:inline">Записаться на просмотр</span>
+            <span class="md:hidden">Посмотреть</span>
+        </button>
+    </div>
+
+    <script>
+        // Gallery data
+        const galleryData = [
+            { src: '/mnt/user-data/uploads/Производство_Чанов.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/Зима-сверху.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/Чан_зима.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/Лето.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/Чан_осень.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/Чан_на_горе.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/Чан_в_Турции.png', type: 'image' },
+            { src: '/mnt/user-data/uploads/grok-video-b13b9b04-c7c4-42f1-a1a5-e13c7ab7a0f2.mp4', type: 'video' },
+            { src: '/mnt/user-data/uploads/grok-video-fd57ed1b-3690-4c56-a3b1-b129505c4014.mp4', type: 'video' },
+            { src: '/mnt/user-data/uploads/Дрон_летит.mp4', type: 'video' }
+        ];
+
+        let currentImageIndex = 0;
+
+        // Gallery filter
+        document.querySelectorAll('.gallery-filter').forEach(filter => {
+            filter.addEventListener('click', function() {
+                // Remove active from all
+                document.querySelectorAll('.gallery-filter').forEach(f => f.classList.remove('active'));
+                // Add active to clicked
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Show/hide items
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    if (filterValue === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        if (item.classList.contains(filterValue)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Open lightbox
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                openLightbox(index);
+            });
+        });
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const content = document.getElementById('lightboxContent');
+            
+            content.innerHTML = '';
+            
+            if (galleryData[index].type === 'video') {
+                const video = document.createElement('video');
+                video.src = galleryData[index].src;
+                video.controls = true;
+                video.autoplay = true;
+                content.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = galleryData[index].src;
+                content.appendChild(img);
+            }
+            
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            // Stop all videos
+            document.querySelectorAll('#lightboxContent video').forEach(v => v.pause());
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = galleryData.length - 1;
+            if (currentImageIndex >= galleryData.length) currentImageIndex = 0;
+            openLightbox(currentImageIndex);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.style.display === 'block') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const endDate = new Date('2025-12-31T23:59:59');
+            const now = new Date();
+            const diff = endDate - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('countdown').textContent = 
+                    `⏰ Осталось: ${days}д ${hours}ч ${minutes}м`;
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+
+        // Modal functions
+        function openModal(type, modelName = '') {
+            if (type === 'visit') {
+                document.getElementById('visitModal').style.display = 'block';
+            } else if (type === 'order') {
+                document.getElementById('orderModelName').textContent = modelName;
+                document.getElementById('orderModal').style.display = 'block';
+            }
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(type) {
+            if (type === 'visit') {
+                document.getElementById('visitModal').style.display = 'none';
+            } else if (type === 'order') {
+                document.getElementById('orderModal').style.display = 'none';
+            }
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const visitModal = document.getElementById('visitModal');
+            const orderModal = document.getElementById('orderModal');
+            const lightbox = document.getElementById('lightbox');
+            
+            if (event.target === visitModal) {
+                closeModal('visit');
+            }
+            if (event.target === orderModal) {
+                closeModal('order');
+            }
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        }
+
+        // Form submissions
+        document.getElementById('visitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            closeModal('visit');
+        });
+
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за заказ! Наш менеджер свяжется с вами в ближайшее время.');
+            closeModal('order');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
